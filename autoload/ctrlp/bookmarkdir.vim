@@ -87,8 +87,14 @@ fu! s:syntax()
 	if !ctrlp#nosy()
 		cal ctrlp#hicheck('CtrlPBookmark', 'Identifier')
 		cal ctrlp#hicheck('CtrlPTabExtra', 'Comment')
-		sy match CtrlPBookmark '^> [^\t]\+' contains=CtrlPLinePre
-		sy match CtrlPTabExtra '\zs\t.*\ze$'
+
+		if ctrlp#au()
+			aug CtrlPSyntax
+				au! FileType ctrlp,ctrlp.*
+					\ sy match CtrlPBookmark '^> [^\t]\+' contains=CtrlPLinePre |
+					\ sy match CtrlPTabExtra '\zs\t.*\ze$'
+			aug END
+		en
 	en
 endf
 " Public {{{1

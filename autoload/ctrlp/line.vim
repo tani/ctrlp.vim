@@ -25,8 +25,14 @@ fu! s:syntax()
 	if !ctrlp#nosy()
 		cal ctrlp#hicheck('CtrlPBufName', 'Directory')
 		cal ctrlp#hicheck('CtrlPTabExtra', 'Comment')
-		sy match CtrlPBufName '\t|\zs[^|]\+\ze|\d\+:\d\+|$'
-		sy match CtrlPTabExtra '\zs\t.*\ze$' contains=CtrlPBufName
+
+		if ctrlp#au()
+			aug CtrlPSyntax
+				au FileType <buffer> ctrlp,ctrlp.*
+					\ sy match CtrlPBufName '\t|\zs[^|]\+\ze|\d\+:\d\+|$' |
+					\ sy match CtrlPTabExtra '\zs\t.*\ze$' contains=CtrlPBufName
+			aug END
+		en
 	en
 endf
 " Public {{{1

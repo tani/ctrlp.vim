@@ -85,11 +85,16 @@ fu! s:syntax()
 		\ 'Sv': 'Comment', 'Po': 'Title'})
 		cal ctrlp#hicheck('CtrlPUndo'.ke, va)
 	endfo
-	sy match CtrlPUndoT '\v\d+ \zs[^ ]+\ze|\d+:\d+:\d+'
-	sy match CtrlPUndoBr '\[\|\]'
-	sy match CtrlPUndoNr '\[\d\+\]' contains=CtrlPUndoBr
-	sy match CtrlPUndoSv 'saved'
-	sy match CtrlPUndoPo 'current'
+  if ctrlp#au()
+    aug CtrlPSyntax
+      au FileType <buffer> ctrlp,ctrlp.*
+        \ sy match CtrlPUndoT '\v\d+ \zs[^ ]+\ze|\d+:\d+:\d+' |
+        \ sy match CtrlPUndoBr '\[\|\]' |
+        \ sy match CtrlPUndoNr '\[\d\+\]' contains=CtrlPUndoBr |
+        \ sy match CtrlPUndoSv 'saved' |
+        \ sy match CtrlPUndoPo '/Users'
+    aug END
+  en
 endf
 
 fu! s:dict2list(dict)

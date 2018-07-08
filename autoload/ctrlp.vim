@@ -2551,6 +2551,10 @@ fu! ctrlp#nosy()
 	retu !( has('syntax') && exists('g:syntax_on') )
 endf
 
+fu! ctrlp#au()
+	retu has('autocmd')
+endf
+
 fu! ctrlp#hicheck(grp, defgrp)
 	if !hlexists(a:grp)
 		exe 'hi link' a:grp a:defgrp

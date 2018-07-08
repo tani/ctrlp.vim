@@ -80,7 +80,11 @@ endf
 fu! s:syntax()
 	if !ctrlp#nosy()
 		cal ctrlp#hicheck('CtrlPTabExtra', 'Comment')
-		sy match CtrlPTabExtra '\zs\t.*\ze$'
+		if ctrlp#au()
+			aug CtrlPSyntax
+				au FileType <buffer> ctrlp,ctrlp.* sy match CtrlPTabExtra '\zs\t.*\ze$'
+			aug END
+		en
 	en
 endf
 " Public {{{1

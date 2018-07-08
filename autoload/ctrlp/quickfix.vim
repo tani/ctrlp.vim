@@ -30,7 +30,11 @@ endf
 fu! s:syntax()
 	if !ctrlp#nosy()
 		cal ctrlp#hicheck('CtrlPqfLineCol', 'Search')
-		sy match CtrlPqfLineCol '|\zs\d\+:\d\+\ze|'
+		if ctrlp#au()
+			aug CtrlPSyntax
+				au! FileType <buffer> ctrlp,ctrlp.* sy match CtrlPqfLineCol '|\zs\d\+:\d\+\ze|'
+			aug END
+		en
 	en
 endf
 " Public {{{1

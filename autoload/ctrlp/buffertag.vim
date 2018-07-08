@@ -214,9 +214,15 @@ fu! s:syntax()
 		cal ctrlp#hicheck('CtrlPTagKind', 'Title')
 		cal ctrlp#hicheck('CtrlPBufName', 'Directory')
 		cal ctrlp#hicheck('CtrlPTabExtra', 'Comment')
-		sy match CtrlPTagKind '\zs[^\t|]\+\ze|\d\+:[^|]\+|\d\+|'
-		sy match CtrlPBufName '|\d\+:\zs[^|]\+\ze|\d\+|'
-		sy match CtrlPTabExtra '\zs\t.*\ze$' contains=CtrlPBufName,CtrlPTagKind
+
+		if ctrlp#au()
+			aug CtrlPSyntax
+				au FileType <buffer> ctrlp,ctrlp.*
+					\ sy match CtrlPTagKind '\zs[^\t|]\+\ze|\d\+:[^|]\+|\d\+|' |
+					\ sy match CtrlPBufName '|\d\+:\zs[^|]\+\ze|\d\+|' |
+					\ sy match CtrlPTabExtra '\zs\t.*\ze$' contains=CtrlPBufName,CtrlPTagKind
+			aug END
+		en
 	en
 endf
 
