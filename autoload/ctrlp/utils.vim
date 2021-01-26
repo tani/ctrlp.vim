@@ -90,8 +90,7 @@ if exists('*fnameescape')
 		endf
 	el
 		fu! ctrlp#utils#fnesc(path, type, ...)
-			let path = fnameescape(a:path)
-			retu a:0 ? escape(path, a:1) : path
+			retu a:0 ? escape(a:path, a:1) : a:path
 		endf
 	en
 el
