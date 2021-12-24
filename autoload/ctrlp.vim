@@ -429,7 +429,7 @@ if has('patch-8.2-0995')
 	fu! s:GlobPath(dirs, depth)
 		let entries = []
 		let dirs = substitute(a:dirs, '\\\([%# ]\)', '\1', 'g')
-		for e in split(dirs, ',')
+		for e in split(dirs, '\n')
 			sil let files = readdir(e, '1', {'sort': 'none'})
 			if !s:showhidden | cal filter(files, 'v:val[0] != "."') | en
 			let entries += map(files, 'e.s:lash.v:val')
@@ -439,7 +439,7 @@ if has('patch-8.2-0995')
 		let g:ctrlp_allfiles += dnf[1]
 		if !empty(dnf[0]) && !s:maxf(len(g:ctrlp_allfiles)) && depth <= s:maxdepth
 			sil! cal ctrlp#progress(len(g:ctrlp_allfiles), 1)
-			cal s:GlobPath(join(dnf[0], ','), depth)
+			cal s:GlobPath(join(dnf[0], "\n"), depth)
 		en
 	endf
 el
