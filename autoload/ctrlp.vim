@@ -1769,7 +1769,7 @@ endf
 
 if exists('*strchars') && exists('*strcharpart')
 	fu! s:pathshorten(str)
-	  retu strcharpart(a:str, 0, 9).'...'.strcharpart(a:str, strchars(a:str) - s:winw + 16)
+		retu strcharpart(a:str, 0, 9).'...'.strcharpart(a:str, strchars(a:str) - s:winw + 16)
 	endf
 el
 	fu! s:pathshorten(str)
