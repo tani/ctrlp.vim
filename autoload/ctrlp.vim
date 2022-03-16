@@ -1762,8 +1762,9 @@ fu! s:formatline2(ct, key, str)
 				let str .= printf('  %s', parts[3])
 			en
 		en
+		retu s:lineprefix.str
 	en
-	let cond = a:ct != 'buf' &&s:ispath && ( s:winw - 4 ) < s:strwidth(str)
+	let cond = s:ispath && ( s:winw - 4 ) < strchars(str)
 	retu s:lineprefix.( cond ? s:pathshorten(str) : str )
 endf
 
