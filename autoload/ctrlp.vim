@@ -753,6 +753,9 @@ fu! s:Render(lines, pat)
 	en
 	if s:mw_order == 'btt' | cal reverse(lines) | en
 	let s:lines = copy(lines)
+	if s:maxfiles && len(lines) > s:maxfiles
+		let lines = lines[:s:maxfiles]
+	en
 	if has('patch-8.1-0') && s:flfunc ==# 's:formatline(v:val)'
 		cal map(lines, function('s:formatline2', [s:curtype()]))
 	el
