@@ -1767,11 +1767,16 @@ fu! s:formatline2(ct, key, str)
 	retu s:lineprefix.( cond ? s:pathshorten(str) : str )
 endf
 
-
-fu! s:pathshorten(str)
-	retu matchstr(a:str, '^.\{9}').'...'
-		\ .matchstr(a:str, '.\{'.( s:winw - 16 ).'}$')
-endf
+if exists('*strchars') && exists('*strcharpart')
+	fu! s:pathshorten(str)
+	  retu strcharpart(a:str, 0, 9).'...'.strcharpart(a:str, strchars(a:str) - s:winw + 16)
+	endf
+el
+	fu! s:pathshorten(str)
+		retu matchstr(a:str, '^.\{9}').'...'
+			\ .matchstr(a:str, '.\{'.( s:winw - 16 ).'}$')
+	endf
+en
 
 fu! s:offset(lines, height)
 	let s:offset = s:mw_order == 'btt' ? ( a:height - s:res_count ) : 0
