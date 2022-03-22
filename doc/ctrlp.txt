@@ -846,6 +846,13 @@ Example: >
                                                        *'g:ctrlp_brief_prompt'*
 When this is set to 1, the <bs> on empty prompt exit CtrlP.
 
+                                                        *'g:ctrlp_use_readdir'*
+Unlike kien/ctrlp.vim, ctrlpvim/ctrlp.vim uses readdir() instead of globpath()
+for speed. Set this option to 0 if you want to revert to the original
+behavior.
+Example: >
+  let g:ctrlp_use_readdir = 0
+<
                                                           *ctrlp-default-value*
 Otherwise, you can use below to change default value.
 Example: >
